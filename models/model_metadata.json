@@ -1,0 +1,97 @@
+{
+  "selected_model": "random_forest",
+  "selection_criterion": "highest F2-score (recall weighted ~4x precision) on the held-out test set, because the fraud class is rare (~3%), accuracy is not a meaningful metric for imbalanced classification, and missing real fraud is costlier than an extra manual review.",
+  "random_state": 42,
+  "features": [
+    "amount",
+    "transaction_hour",
+    "transaction_day",
+    "customer_age",
+    "account_age_days",
+    "previous_transactions",
+    "failed_attempts",
+    "transactions_last_24h",
+    "average_transaction_amount",
+    "distance_from_usual_location",
+    "is_new_device",
+    "is_international",
+    "ip_risk_score",
+    "velocity_score",
+    "previous_fraud_count",
+    "merchant_category",
+    "payment_method",
+    "device_type"
+  ],
+  "target": "fraud_label",
+  "xgboost_available": true,
+  "risk_thresholds": {
+    "low_max": 30,
+    "medium_max": 70
+  },
+  "all_model_results": [
+    {
+      "model": "logistic_regression",
+      "precision": 0.1015,
+      "recall": 0.7553,
+      "f1_score": 0.1789,
+      "f2_score": 0.33,
+      "roc_auc": 0.8653,
+      "pr_auc": 0.2529,
+      "confusion_matrix": [
+        [
+          7832,
+          1886
+        ],
+        [
+          69,
+          213
+        ]
+      ],
+      "train_time_seconds": 0.08
+    },
+    {
+      "model": "random_forest",
+      "precision": 0.1845,
+      "recall": 0.5071,
+      "f1_score": 0.2706,
+      "f2_score": 0.3757,
+      "roc_auc": 0.8596,
+      "pr_auc": 0.197,
+      "confusion_matrix": [
+        [
+          9086,
+          632
+        ],
+        [
+          139,
+          143
+        ]
+      ],
+      "train_time_seconds": 3.31
+    },
+    {
+      "model": "xgboost",
+      "precision": 0.1707,
+      "recall": 0.5035,
+      "f1_score": 0.2549,
+      "f2_score": 0.3622,
+      "roc_auc": 0.8305,
+      "pr_auc": 0.1839,
+      "confusion_matrix": [
+        [
+          9028,
+          690
+        ],
+        [
+          140,
+          142
+        ]
+      ],
+      "train_time_seconds": 1.14
+    }
+  ],
+  "trained_at": "2026-08-29 21:33:16",
+  "dataset_size": 50000,
+  "dataset_fraud_rate_pct": 2.82,
+  "dataset_is_synthetic": true
+}
